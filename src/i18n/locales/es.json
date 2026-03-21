@@ -2,12 +2,14 @@
   "nav": {
     "home": "Inicio",
     "words": "Palabras",
+    "vocabulary": "Vocabulario",
     "difficultWords": "Palabras difíciles",
     "flashcards": "Tarjetas",
     "quiz": "Quiz",
     "practice": "Práctica",
     "stats": "Estadísticas",
-    "settings": "Ajustes"
+    "settings": "Ajustes",
+    "myWords": "Mis Palabras"
   },
   "brand": {
     "name": "Polyglot",
@@ -22,6 +24,7 @@
     "de": "Alemán",
     "it": "Italiano",
     "pt": "Portugués",
+    "nl": "Holandés",
     "iSpeak": "Hablo",
     "iLearn": "Aprendo",
     "swapLanguages": "Intercambiar idiomas",
@@ -29,10 +32,12 @@
   },
   "skillLevel": {
     "title": "Nivel",
-    "beginner": "Principiante",
-    "intermediate": "Intermedio",
-    "advanced": "Avanzado",
-    "expert": "Experto"
+    "A1": "Principiante",
+    "A2": "Elemental",
+    "B1": "Intermedio",
+    "B2": "Int. Alto",
+    "C1": "Avanzado",
+    "C2": "Maestría"
   },
   "theme": {
     "title": "Tema",
@@ -123,9 +128,10 @@
     "formalPrompt": "¿\"{{word}}\" es formal o coloquial? ¿Qué alternativas existen?"
   },
   "practice": {
-    "title": "Práctica",
-    "subtitle": "Repasa y pon a prueba tu vocabulario",
-    "choosePracticeMode": "Elige un modo de práctica arriba"
+    "title": "Vocabulario",
+    "subtitle": "Tus palabras guardadas y práctica",
+    "choosePracticeMode": "Elige un modo de práctica arriba",
+    "fromSavedWords": "De tus palabras guardadas"
   },
   "flashcards": {
     "tapToReveal": "toca para revelar",
@@ -172,7 +178,9 @@
     "pause": "Pausa",
     "resume": "Reanudar",
     "stop": "Parar",
-    "restart": "Reiniciar"
+    "restart": "Reiniciar",
+    "add": "Añadir",
+    "cancel": "Cancelar"
   },
   "streak": {
     "dayStreak": "Racha de {{count}} d\u00edas",
@@ -262,8 +270,14 @@
     "dueNow": "Pendiente ahora",
     "dueTomorrow": "Pendiente ma\u00f1ana",
     "dueInDays": "Pendiente en {{days}} d\u00edas",
-    "addNote": "+ A\u00f1adir nota",
-    "notePlaceholder": "A\u00f1ade un mnem\u00f3nico o nota..."
+    "addNote": "+ Añadir nota",
+    "notePlaceholder": "Añade un mnemónico o nota...",
+    "addWord": "Añadir palabra",
+    "addWordTitle": "Añadir una palabra",
+    "wordLabel": "Palabra",
+    "translationLabel": "Traducción",
+    "contextLabel": "Contexto (opcional)",
+    "wordRequired": "Se requiere palabra y traducción"
   },
   "uiLanguage": {
     "title": "Idioma",

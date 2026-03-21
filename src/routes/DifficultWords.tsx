@@ -18,22 +18,28 @@ function relativeReviewDate(timestamp: number, t: (key: string, opts?: Record<st
 }
 
 export default function DifficultWords() {
-  const { words, loading, loadWords, removeWord, updateWord, getWordsDue } = useDifficultWordsStore()
+  const { words, loading, loadWords, addWord, removeWord, updateWord, getWordsDue } = useDifficultWordsStore()
   const { direction } = useSettingsStore()
   const { t } = useTranslation()
   const [filter, setFilter] = useState<Filter>('all')
   const [chatWord, setChatWord] = useState<DifficultWord | null>(null)
   const [editingNote, setEditingNote] = useState<string | null>(null)
   const [noteText, setNoteText] = useState('')
+  const [showAddForm, setShowAddForm] = useState(false)
+  const [newWord, setNewWord] = useState('')
+  const [newTranslation, setNewTranslation] = useState('')
+  const [newContext, setNewContext] = useState('')
+  const [addError, setAddError] = useState('')
 
   useEffect(() => {
     loadWords()
   }, [loadWords])
 
   const dueCount = getWordsDue().length
+  const [now] = useState(() => Date.now())
 
   const filtered = words.filter((w) => {
-    if (filter === 'due') return (w.srsNextReview ?? 0) <= Date.now() && w.mastery !== 'mastered'
+    if (filter === 'due') return (w.srsNextReview ?? 0) <= now && w.mastery !== 'mastered'
     if (filter === 'new') return (w.mastery || 'new') === 'new'
     if (filter === 'recognized') return w.mastery === 'recognized'
     if (filter === 'recalled') return w.mastery === 'recalled'
@@ -60,12 +66,102 @@ export default function DifficultWords() {
     setEditingNote(null)
   }
 
+  async function handleAddWord() {
+    const w = newWord.trim()
+    const tr = newTranslation.trim()
+    if (!w || !tr) {
+      setAddError(t('difficultWords.wordRequired'))
+      return
+    }
+    await addWord({
+      id: crypto.randomUUID(),
+      word: w,
+      translation: tr,
+      context: newContext.trim(),
+      contextTranslation: '',
+      textId: 'manual',
+      direction,
+      createdAt: Date.now(),
+      learned: false,
+      mastery: 'new',
+      srsEaseFactor: 2.5,
+      srsInterval: 0,
+      srsRepetitions: 0,
+      srsNextReview: Date.now(),
+    })
+    setNewWord('')
+    setNewTranslation('')
+    setNewContext('')
+    setAddError('')
+    setShowAddForm(false)
+  }
+
   return (
     <div className="space-y-5 animate-fade-in">
-      <div>
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-heading gradient-text inline-block">{t('difficultWords.title')}</h1>
-        <p className="text-th-muted text-sm mt-1 font-ui">{t('difficultWords.wordsSaved', { count: words.length })}</p>
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-heading gradient-text inline-block">{t('difficultWords.title')}</h1>
+          <p className="text-th-muted text-sm mt-1 font-ui">{t('difficultWords.wordsSaved', { count: words.length })}</p>
+        </div>
+        <button
+          onClick={() => setShowAddForm(!showAddForm)}
+          className="flex items-center gap-1.5 px-3.5 py-2 rounded-[var(--t-r-btn)] bg-th-accent text-th-on-accent text-xs font-semibold font-ui hover:bg-th-accent-hover active:scale-[0.97] transition-all shrink-0 mt-1"
+        >
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
+          {t('difficultWords.addWord')}
+        </button>
       </div>
+
+      {/* Add word form */}
+      {showAddForm && (
+        <div className="card rounded-[var(--t-r-card)] p-4 space-y-3 animate-fade-in">
+          <p className="text-sm font-semibold text-th-primary font-heading">{t('difficultWords.addWordTitle')}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <input
+              type="text"
+              value={newWord}
+              onChange={(e) => { setNewWord(e.target.value); setAddError('') }}
+              placeholder={t('difficultWords.wordLabel')}
+              className="bg-th-surface-hover border border-th-border rounded-[var(--t-r-input)] px-3 py-2 text-sm text-th-primary placeholder-th-muted font-ui focus:outline-none focus:border-th-accent/40 focus:ring-1 focus:ring-th-accent/20 transition-all"
+              autoFocus
+              onKeyDown={(e) => e.key === 'Enter' && handleAddWord()}
+            />
+            <input
+              type="text"
+              value={newTranslation}
+              onChange={(e) => { setNewTranslation(e.target.value); setAddError('') }}
+              placeholder={t('difficultWords.translationLabel')}
+              className="bg-th-surface-hover border border-th-border rounded-[var(--t-r-input)] px-3 py-2 text-sm text-th-primary placeholder-th-muted font-ui focus:outline-none focus:border-th-accent/40 focus:ring-1 focus:ring-th-accent/20 transition-all"
+              onKeyDown={(e) => e.key === 'Enter' && handleAddWord()}
+            />
+          </div>
+          <input
+            type="text"
+            value={newContext}
+            onChange={(e) => setNewContext(e.target.value)}
+            placeholder={t('difficultWords.contextLabel')}
+            className="w-full bg-th-surface-hover border border-th-border rounded-[var(--t-r-input)] px-3 py-2 text-sm text-th-primary placeholder-th-muted font-ui focus:outline-none focus:border-th-accent/40 focus:ring-1 focus:ring-th-accent/20 transition-all"
+            onKeyDown={(e) => e.key === 'Enter' && handleAddWord()}
+          />
+          {addError && <p className="text-xs text-th-danger font-ui">{addError}</p>}
+          <div className="flex gap-2">
+            <button
+              onClick={handleAddWord}
+              className="flex-1 py-2 rounded-[var(--t-r-btn)] bg-th-accent text-th-on-accent text-sm font-semibold font-ui hover:bg-th-accent-hover active:scale-[0.98] transition-all"
+            >
+              {t('common.add')}
+            </button>
+            <button
+              onClick={() => { setShowAddForm(false); setAddError('') }}
+              className="px-4 py-2 rounded-[var(--t-r-btn)] btn-surface text-th-secondary text-sm font-semibold font-ui hover:bg-th-surface-hover active:scale-[0.98] transition-all"
+            >
+              {t('common.cancel')}
+            </button>
+          </div>
+        </div>
+      )}
 
       <div className="flex gap-1.5 overflow-x-auto scrollbar-hide pb-1 -mx-1 px-1">
         {filters.map((f) => (
@@ -122,6 +218,9 @@ export default function DifficultWords() {
                     <span className="font-semibold text-th-primary font-heading">{word.word}</span>
                     <span className="text-th-accent text-sm font-body">{word.translation}</span>
                     <MasteryBadge level={(word.mastery || 'new') as MasteryLevel} />
+                    {word.textId === 'manual' && (
+                      <span className="text-[9px] font-medium px-1.5 py-0.5 rounded-[var(--t-r-badge)] bg-th-surface-hover text-th-muted font-ui uppercase">manual</span>
+                    )}
                   </div>
                   {word.context && (
                     <p className="text-th-muted text-xs mt-1.5 italic truncate font-body">

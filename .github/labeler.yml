@@ -1,0 +1,36 @@
+docs:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "*.md"
+          - "docs/**"
+          - "LICENSE"
+
+ci:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/**"
+          - "Makefile"
+          - ".editorconfig"
+          - "codecov.yml"
+
+tests:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "src/**/*.test.*"
+          - "src/**/*.spec.*"
+          - "vitest.config.*"
+
+frontend:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "src/**"
+          - "index.html"
+          - "vite.config.*"
+          - "tailwind.config.*"
+          - "tsconfig*.json"
+
+server:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "server/**"
+          - "scripts/**"

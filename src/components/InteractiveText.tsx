@@ -140,6 +140,7 @@ const WordToken = memo(function WordToken({
   highlighted,
   paused,
   hasTranslation,
+  isSaved,
   onClick,
 }: {
   text: string
@@ -147,6 +148,7 @@ const WordToken = memo(function WordToken({
   highlighted: boolean
   paused?: boolean
   hasTranslation: boolean
+  isSaved: boolean
   onClick: (text: string, index: number) => void
 }) {
   return (
@@ -154,6 +156,7 @@ const WordToken = memo(function WordToken({
       role="button"
       tabIndex={0}
       data-has-translation={hasTranslation}
+      data-saved={isSaved}
       onClick={() => onClick(text, index)}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -161,8 +164,8 @@ const WordToken = memo(function WordToken({
           onClick(text, index)
         }
       }}
-      className={`word-token cursor-pointer rounded-sm px-[3px] py-[2px] text-th-primary ${
-        paused ? 'tts-paused' : highlighted ? 'tts-active' : ''
+      className={`word-token cursor-pointer rounded-sm px-[3px] py-[2px] ${
+        paused ? 'tts-paused' : highlighted ? 'tts-active' : isSaved ? 'word-saved' : 'text-th-primary'
       }`}
     >
       {text}
@@ -197,6 +200,15 @@ export default memo(function InteractiveText({
   const [visibleTranslations, setVisibleTranslations] = useState<Set<number>>(new Set())
   const [chatWord, setChatWord] = useState<WordTranslation | null>(null)
   const [chatContext, setChatContext] = useState('')
+
+  // Set of saved word keys for quick lookup (highlight saved words in text)
+  const savedWordKeys = useMemo(() => {
+    const set = new Set<string>()
+    for (const w of words) {
+      set.add(w.word.toLowerCase())
+    }
+    return set
+  }, [words])
 
   const translationMap = useMemo(() => {
     const map = new Map<string, WordTranslation>()
@@ -416,6 +428,8 @@ export default memo(function InteractiveText({
                     ? words.some((w) => w.word.toLowerCase() === tooltipWord.word.toLowerCase() && w.textId === textId)
                     : false
 
+                  const isTokenSaved = savedWordKeys.has(token.text.toLowerCase())
+
                   return (
                     <span key={`${sIdx}-${i}`} className={isTooltipTarget ? 'relative inline-block' : undefined}>
                       <WordToken
@@ -424,6 +438,7 @@ export default memo(function InteractiveText({
                         highlighted={isHighlighted || isTooltipTarget}
                         paused={isHighlighted && highlightPaused}
                         hasTranslation={matchableWords.has(token.text.toLowerCase())}
+                        isSaved={isTokenSaved}
                         onClick={handleWordClick}
                       />
                       {isTooltipTarget && tooltipWord && (
@@ -461,10 +476,14 @@ export default memo(function InteractiveText({
         <div className="mt-5 flex items-center gap-3">
           <button
             onClick={toggleAllTranslations}
-            className="flex items-center gap-2 text-sm font-medium text-th-muted hover:text-th-accent transition-colors font-ui"
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-[var(--t-r-btn)] text-sm font-semibold font-ui transition-all active:scale-[0.97] ${
+              allVisible
+                ? 'bg-th-accent/15 text-th-accent ring-1 ring-th-accent/25'
+                : 'bg-th-accent text-th-on-accent hover:bg-th-accent-hover btn-glow'
+            }`}
           >
             <svg
-              className={`w-4 h-4 transition-transform duration-200 ${allVisible ? 'rotate-180' : ''}`}
+              className="w-4 h-4"
               fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
             >
               <path strokeLinecap="round" strokeLinejoin="round" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />

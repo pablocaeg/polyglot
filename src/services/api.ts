@@ -206,8 +206,8 @@ export async function sendChatMessage(
     }
 
     onDone()
-  } catch (e: any) {
-    if (e.name !== 'AbortError') {
+  } catch (e: unknown) {
+    if (e instanceof Error && e.name !== 'AbortError') {
       onError(e.message)
     }
   }

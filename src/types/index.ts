@@ -1,11 +1,11 @@
-export type Language = 'pl' | 'es' | 'en' | 'fr' | 'de' | 'it' | 'pt'
+export type Language = 'pl' | 'es' | 'en' | 'fr' | 'de' | 'it' | 'pt' | 'nl'
 
 export type LanguageDirection = {
   native: Language
   target: Language
 }
 
-export type SkillLevel = 'beginner' | 'intermediate' | 'advanced' | 'expert'
+export type SkillLevel = 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2'
 
 export type MasteryLevel = 'new' | 'recognized' | 'recalled' | 'mastered'
 

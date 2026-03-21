@@ -90,6 +90,7 @@ function QuizLoop({ words: quizWords }: { words: QuizWord[] }) {
     // Save missed words to difficult words store (only if translation exists)
     if (!correct && current.sourceWord && !current.sourceWord.alreadySaved && current.sourceWord.translation?.trim()) {
       const w = current.sourceWord
+      const now = Date.now() // eslint-disable-line react-hooks/purity
       addWord({
         id: crypto.randomUUID(),
         word: w.word,
@@ -98,13 +99,13 @@ function QuizLoop({ words: quizWords }: { words: QuizWord[] }) {
         contextTranslation: '',
         textId: '',
         direction,
-        createdAt: Date.now(),
+        createdAt: now,
         learned: false,
         mastery: 'new',
         srsEaseFactor: 2.5,
         srsInterval: 0,
         srsRepetitions: 0,
-        srsNextReview: Date.now(),
+        srsNextReview: now,
       })
     }
 

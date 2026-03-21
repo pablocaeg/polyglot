@@ -7,6 +7,7 @@ export const LANG_NAMES: Record<string, string> = {
   de: 'German',
   it: 'Italian',
   pt: 'Portuguese',
+  nl: 'Dutch',
 }
 
 /** TTS voice mapping per language */
@@ -18,4 +19,5 @@ export const VOICE_MAP: Record<string, string> = {
   de: 'de-DE-KatjaNeural',
   it: 'it-IT-ElsaNeural',
   pt: 'pt-PT-RaquelNeural',
+  nl: 'nl-NL-ColetteNeural',
 }

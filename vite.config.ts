@@ -121,7 +121,7 @@ export default defineConfig(({ mode }) => {
             const langNames: Record<string, string> = { pl: 'Polish', es: 'Spanish', en: 'English', fr: 'French', de: 'German', it: 'Italian', pt: 'Portuguese' }
             const targetLang = langNames[body.direction?.target] || 'target language'
             const wordCount = (parsed.content || '').split(/\s+/).length
-            const minWords: Record<string, number> = { beginner: 40, intermediate: 60, advanced: 90, expert: 120 }
+            const minWords: Record<string, number> = { A1: 20, A2: 40, B1: 60, B2: 80, C1: 100, C2: 120 }
             const required = minWords[body.skillLevel] || 40
 
             if (wordCount < required && parsed.content) {

@@ -55,7 +55,7 @@ export default function WordPopup({
   // Auto-translate when word has no translation
   useEffect(() => {
     if (hasOriginalTranslation || phrase || !word?.word) return
-    setTranslating(true)
+    setTranslating(true) // eslint-disable-line react-hooks/set-state-in-effect
     translateWord(word.word, direction.target, direction.native, context)
       .then((result) => setAutoTranslation(result))
       .catch(() => {})

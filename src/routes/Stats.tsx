@@ -48,7 +48,7 @@ export default function Stats() {
       days.push({ date: key, count: day?.reviewCount || 0, label: dayNames[d.getDay()] })
     }
     return days
-  }, [history])
+  }, [history, t])
 
   const maxReviews = Math.max(...weeklyData.map((d) => d.count), 1)
   const totalReviews = weeklyData.reduce((sum, d) => sum + d.count, 0)

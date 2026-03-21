@@ -426,7 +426,7 @@ export default function WordChat({ word, context, direction, onClose }: WordChat
 
 function AssistantBubble({
   content,
-  direction: _direction,
+  direction: _direction, // eslint-disable-line @typescript-eslint/no-unused-vars
   speakingId,
   onSpeak,
   onSpeakAll,

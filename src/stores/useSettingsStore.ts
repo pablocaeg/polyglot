@@ -21,7 +21,7 @@ export const useSettingsStore = create<SettingsState>()(
   persist(
     (set) => ({
       direction: { native: 'es', target: 'pl' },
-      skillLevel: 'beginner',
+      skillLevel: 'A1',
       readingPreferences: { fontSize: 'medium', sentenceMode: false, ttsSpeed: 'normal' },
       dailyGoal: 10,
       setNativeLanguage: (lang) =>

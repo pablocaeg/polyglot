@@ -1,14 +1,15 @@
+/* eslint-disable react-refresh/only-export-components */
 import { StrictMode, lazy, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 import './i18n'
 import './index.css'
+import ErrorBoundary from './components/ErrorBoundary'
 import Layout from './components/Layout'
 import Home from './routes/Home'
 
 // Lazy-load all routes except Home (first paint)
 const TextReader = lazy(() => import('./routes/TextReader'))
-const DifficultWords = lazy(() => import('./routes/DifficultWords'))
 const Practice = lazy(() => import('./routes/Practice'))
 const Flashcards = lazy(() => import('./routes/Flashcards'))
 const Quiz = lazy(() => import('./routes/Quiz'))
@@ -37,7 +38,7 @@ const router = createBrowserRouter([
     children: [
       { path: '/', element: <Home /> },
       { path: '/text/:id', element: withSuspense(TextReader) },
-      { path: '/words', element: withSuspense(DifficultWords) },
+      { path: '/words', element: <Navigate to="/practice" replace /> },
       {
         path: '/practice',
         element: withSuspense(Practice),
@@ -54,6 +55,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <ErrorBoundary>
+      <RouterProvider router={router} />
+    </ErrorBoundary>
   </StrictMode>
 )

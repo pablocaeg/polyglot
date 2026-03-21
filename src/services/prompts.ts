@@ -2,18 +2,16 @@ import type { LanguageDirection, SkillLevel, TextCategory } from '../types'
 
 const LANG_NAMES: Record<string, string> = {
   pl: 'Polish', es: 'Spanish', en: 'English',
-  fr: 'French', de: 'German', it: 'Italian', pt: 'Portuguese',
+  fr: 'French', de: 'German', it: 'Italian', pt: 'Portuguese', nl: 'Dutch',
 }
 
 const LEVEL_DESCRIPTIONS: Record<SkillLevel, string> = {
-  beginner:
-    'A1-A2 level. Use very simple vocabulary (most common 500 words), short sentences (5-8 words), present tense only. Write 6-8 sentences (at least 50 words total).',
-  intermediate:
-    'B1 level. Use common vocabulary (1500 words), compound sentences, past and future tenses. Write 8-10 sentences (at least 80 words total).',
-  advanced:
-    'B2-C1 level. Use rich vocabulary including idioms and colloquial expressions, complex grammar, subjunctive mood where appropriate. Write 10-14 sentences (at least 120 words total).',
-  expert:
-    'C2 level. Use sophisticated vocabulary, literary expressions, complex nested sentences, nuanced grammar. Write 14-18 sentences (at least 160 words total).',
+  A1: 'A1 level. Use the most basic vocabulary (200-300 most common words), very short sentences (3-6 words), present tense only, simple subject-verb-object structure. Write 4-6 sentences (at least 30 words total).',
+  A2: 'A2 level. Use simple vocabulary (most common 500 words), short sentences (5-8 words), present tense with some past tense. Write 6-8 sentences (at least 50 words total).',
+  B1: 'B1 level. Use common vocabulary (1500 words), compound sentences, past and future tenses. Write 8-10 sentences (at least 80 words total).',
+  B2: 'B2 level. Use broader vocabulary including some idioms, complex sentences, all tenses including conditional. Write 10-12 sentences (at least 100 words total).',
+  C1: 'C1 level. Use rich vocabulary including idioms and colloquial expressions, complex grammar, subjunctive mood where appropriate. Write 12-14 sentences (at least 130 words total).',
+  C2: 'C2 level. Use sophisticated vocabulary, literary expressions, complex nested sentences, nuanced grammar. Write 14-18 sentences (at least 160 words total).',
 }
 
 /** Phase 1: Generate the text + translation only (fast, small response) */

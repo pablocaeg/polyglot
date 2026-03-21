@@ -18,20 +18,22 @@
 
 import pg from 'pg'
 
-const LANGS = ['pl', 'es', 'en', 'fr', 'de', 'it', 'pt'] as const
-const LEVELS = ['beginner', 'intermediate', 'advanced', 'expert'] as const
+const LANGS = ['pl', 'es', 'en', 'fr', 'de', 'it', 'pt', 'nl'] as const
+const LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'] as const
 const CATEGORIES = ['culture', 'food', 'travel', 'news', 'stories', 'daily-life', 'other'] as const
 
 const LANG_NAMES: Record<string, string> = {
   pl: 'Polish', es: 'Spanish', en: 'English',
-  fr: 'French', de: 'German', it: 'Italian', pt: 'Portuguese',
+  fr: 'French', de: 'German', it: 'Italian', pt: 'Portuguese', nl: 'Dutch',
 }
 
 const LEVEL_DESCRIPTIONS: Record<string, string> = {
-  beginner: 'A1-A2 level. Use very simple vocabulary (most common 500 words), short sentences (5-8 words), present tense only. Write 6-8 sentences (at least 50 words total).',
-  intermediate: 'B1 level. Use common vocabulary (1500 words), compound sentences, past and future tenses. Write 8-10 sentences (at least 80 words total).',
-  advanced: 'B2-C1 level. Use rich vocabulary including idioms and colloquial expressions, complex grammar, subjunctive mood where appropriate. Write 10-14 sentences (at least 120 words total).',
-  expert: 'C2 level. Use sophisticated vocabulary, literary expressions, complex nested sentences, nuanced grammar. Write 14-18 sentences (at least 160 words total).',
+  A1: 'A1 level. Use very simple vocabulary (most common 300 words), short sentences (4-6 words), present tense only. Write 5-7 sentences (at least 40 words total).',
+  A2: 'A2 level. Use simple vocabulary (most common 600 words), short sentences (5-8 words), present and simple past tense. Write 6-8 sentences (at least 50 words total).',
+  B1: 'B1 level. Use common vocabulary (1500 words), compound sentences, past and future tenses. Write 8-10 sentences (at least 80 words total).',
+  B2: 'B2 level. Use varied vocabulary, complex sentences, conditional and passive constructions. Write 10-12 sentences (at least 100 words total).',
+  C1: 'C1 level. Use rich vocabulary including idioms and colloquial expressions, complex grammar, subjunctive mood where appropriate. Write 12-14 sentences (at least 120 words total).',
+  C2: 'C2 level. Use sophisticated vocabulary, literary expressions, complex nested sentences, nuanced grammar. Write 14-18 sentences (at least 160 words total).',
 }
 
 // Priority pairs (generate these first)

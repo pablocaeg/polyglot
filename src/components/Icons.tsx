@@ -183,6 +183,20 @@ export function FlagIT({ className = 'w-8 h-6' }: IconProps) {
   )
 }
 
+export function FlagNL({ className = 'w-8 h-6' }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 40 28" xmlns="http://www.w3.org/2000/svg">
+      <defs><clipPath id="nl-clip"><rect width="40" height="28" rx="3" /></clipPath></defs>
+      <g clipPath="url(#nl-clip)">
+        <rect width="40" height="9.33" fill="#AE1C28" />
+        <rect y="9.33" width="40" height="9.34" fill="#ffffff" />
+        <rect y="18.67" width="40" height="9.33" fill="#21468B" />
+      </g>
+      <rect width="40" height="28" rx="3" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.15" />
+    </svg>
+  )
+}
+
 export function FlagPT({ className = 'w-8 h-6' }: IconProps) {
   return (
     <svg className={className} viewBox="0 0 40 28" xmlns="http://www.w3.org/2000/svg">

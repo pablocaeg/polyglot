@@ -2,12 +2,14 @@
   "nav": {
     "home": "Home",
     "words": "Words",
+    "vocabulary": "Vocabulary",
     "difficultWords": "Difficult Words",
     "flashcards": "Flashcards",
     "quiz": "Quiz",
     "practice": "Practice",
     "stats": "Stats",
-    "settings": "Settings"
+    "settings": "Settings",
+    "myWords": "My Words"
   },
   "brand": {
     "name": "Polyglot",
@@ -22,6 +24,7 @@
     "de": "German",
     "it": "Italian",
     "pt": "Portuguese",
+    "nl": "Dutch",
     "iSpeak": "I speak",
     "iLearn": "I learn",
     "swapLanguages": "Swap languages",
@@ -29,10 +32,12 @@
   },
   "skillLevel": {
     "title": "Skill Level",
-    "beginner": "Beginner",
-    "intermediate": "Intermediate",
-    "advanced": "Advanced",
-    "expert": "Expert"
+    "A1": "Beginner",
+    "A2": "Elementary",
+    "B1": "Intermediate",
+    "B2": "Upper Int.",
+    "C1": "Advanced",
+    "C2": "Mastery"
   },
   "theme": {
     "title": "Theme",
@@ -84,7 +89,7 @@
     "nextSentence": "Next sentence ({{current}}/{{total}})",
     "allRevealed": "All sentences revealed",
     "loadingVocab": "Loading vocabulary...",
-    "showTranslations": "Show translations",
+    "showTranslations": "Translate",
     "hideTranslations": "Hide translations",
     "doubleTapHint": "Double-tap a sentence to translate it",
     "speed": "Speed",
@@ -123,29 +128,30 @@
     "formalPrompt": "Is \"{{word}}\" formal or casual? What alternatives exist?"
   },
   "practice": {
-    "title": "Practice",
-    "subtitle": "Review and test your vocabulary",
-    "choosePracticeMode": "Choose a practice mode above"
+    "title": "Vocabulary",
+    "subtitle": "Your saved words and practice",
+    "choosePracticeMode": "Choose a practice mode above",
+    "fromSavedWords": "From your saved words"
   },
   "flashcards": {
     "tapToReveal": "tap to reveal",
     "stillLearning": "Still learning",
     "gotIt": "Got it!",
-    "noWordsToReview": "No words due for review",
-    "markWordsDifficult": "Mark words as difficult while reading",
+    "noWordsToReview": "No words to review",
+    "markWordsDifficult": "Save words while reading to practice them here",
     "allCaughtUp": "All caught up!",
     "reviewedCount": "You reviewed {{count}} words this session",
     "due": "Due",
     "all": "All",
     "reviewAll": "Review all words",
     "takeAQuiz": "Take a quiz",
-    "readAndMark": "Read & mark words"
+    "readAndMark": "Read & save words"
   },
   "quiz": {
     "translateThisWord": "Translate this word",
     "needAtLeast4Words": "Need at least 4 words for a quiz",
     "needUniqueTranslations": "You have {{count}} words, but need 4 with unique translations.",
-    "markMoreWords": "Mark more words while reading",
+    "markMoreWords": "Save more words while reading",
     "readyToTest": "Ready to test yourself?",
     "wordsAvailable": "{{count}} words available",
     "startQuiz": "Start Quiz",
@@ -155,7 +161,7 @@
     "youllGetThere": "You'll get there!",
     "tryAgain": "Try Again",
     "reviewWeakWords": "Review weak words",
-    "readAndMark": "Read & mark words"
+    "readAndMark": "Read & save words"
   },
   "common": {
     "back": "Back",
@@ -172,7 +178,9 @@
     "pause": "Pause",
     "resume": "Resume",
     "stop": "Stop",
-    "restart": "Restart"
+    "restart": "Restart",
+    "add": "Add",
+    "cancel": "Cancel"
   },
   "streak": {
     "dayStreak": "{{count}}-day streak",
@@ -241,7 +249,7 @@
     "wordsDue": "{{count}} words due"
   },
   "difficultWords": {
-    "title": "Difficult Words",
+    "title": "My Words",
     "wordsSaved": "{{count}} words saved",
     "all": "All",
     "due": "Due",
@@ -263,7 +271,13 @@
     "dueTomorrow": "Due tomorrow",
     "dueInDays": "Due in {{days}} days",
     "addNote": "+ Add note",
-    "notePlaceholder": "Add a mnemonic or note..."
+    "notePlaceholder": "Add a mnemonic or note...",
+    "addWord": "Add word",
+    "addWordTitle": "Add a word",
+    "wordLabel": "Word",
+    "translationLabel": "Translation",
+    "contextLabel": "Context (optional)",
+    "wordRequired": "Word and translation are required"
   },
   "gamification": {
     "levelShort": "Lv.{{level}}",

@@ -286,6 +286,16 @@ body {
   z-index: -1;
 }
 
+/* ─── Reduced motion ───────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* ─── Focus-visible for keyboard navigation ───── */
 *:focus-visible {
   outline: 2px solid var(--t-accent);
@@ -320,6 +330,17 @@ input:focus-visible,
   outline: 2px solid var(--t-accent);
   outline-offset: 1px;
   border-radius: 3px;
+}
+
+/* Saved word highlight — distinct accent underline */
+.word-token.word-saved {
+  color: var(--t-accent);
+  border-bottom: 2px solid color-mix(in srgb, var(--t-accent) 50%, transparent);
+  border-bottom-style: solid;
+}
+.word-token[data-saved="true"] {
+  border-bottom-color: color-mix(in srgb, var(--t-accent) 50%, transparent);
+  border-bottom-style: solid;
 }
 
 /* TTS highlight — pulse glow */

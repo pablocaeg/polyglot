@@ -10,13 +10,13 @@ import { useDifficultWordsStore } from '../stores/useDifficultWordsStore'
 import { generateText, fetchVocabulary } from '../services/api'
 import { preload as preloadTTS } from '../services/speech'
 // import { suggestLevelChange } from '../utils/difficultyAdvisor'
-import { FlagPL, FlagES, FlagEN, FlagFR, FlagDE, FlagIT, FlagPT, BookStack } from '../components/Icons'
+import { FlagPL, FlagES, FlagEN, FlagFR, FlagDE, FlagIT, FlagPT, FlagNL, BookStack } from '../components/Icons'
 import LoadingQuiz from '../components/LoadingQuiz'
 import type { TextCategory } from '../types'
 
 const FLAG: Record<string, typeof FlagPL> = {
   pl: FlagPL, es: FlagES, en: FlagEN,
-  fr: FlagFR, de: FlagDE, it: FlagIT, pt: FlagPT,
+  fr: FlagFR, de: FlagDE, it: FlagIT, pt: FlagPT, nl: FlagNL,
 }
 
 const CATEGORY_KEYS: TextCategory[] = ['culture', 'food', 'travel', 'news', 'stories', 'daily-life']
@@ -100,11 +100,6 @@ export default function Home() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
           </svg>
         </button>
-      )}
-
-      {/* Difficulty advisor */}
-      {false && (
-        <div />
       )}
 
       {/* Settings */}

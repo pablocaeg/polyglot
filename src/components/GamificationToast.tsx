@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useGamificationStore } from '../stores/useGamificationStore'
 import { ACHIEVEMENTS, getLevelForXP } from '../utils/gamification'
@@ -20,16 +20,16 @@ function Particle({ delay, x, color }: { delay: number; x: number; color: string
   )
 }
 
+const CONFETTI_COLORS = ['var(--t-accent)', 'var(--t-warning)', 'var(--t-success)', 'var(--t-danger)']
+const CONFETTI_PARTICLES = Array.from({ length: 16 }, (_, i) => ({
+  id: i,
+  delay: (i * 0.03) + (i % 3) * 0.1,
+  x: 15 + ((i * 4.375) % 70),
+  color: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
+}))
+
 function Confetti() {
-  const particles = useMemo(() => {
-    const colors = ['var(--t-accent)', 'var(--t-warning)', 'var(--t-success)', 'var(--t-danger)']
-    return Array.from({ length: 16 }, (_, i) => ({
-      id: i,
-      delay: Math.random() * 0.5,
-      x: 15 + Math.random() * 70,
-      color: colors[i % colors.length],
-    }))
-  }, [])
+  const particles = CONFETTI_PARTICLES
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -152,16 +152,18 @@ export default function GamificationToast() {
   useEffect(() => {
     if (!pendingToast) return
 
-    setVisible(true)
+    // Delay to next tick so React batches correctly
+    const show = requestAnimationFrame(() => setVisible(true))
 
     if (pendingToast.type === 'xp') {
       const timer = setTimeout(() => {
         setVisible(false)
         setTimeout(dismissToast, 300)
       }, 1800)
-      return () => clearTimeout(timer)
+      return () => { cancelAnimationFrame(show); clearTimeout(timer) }
     }
     // Achievements stay until dismissed manually
+    return () => cancelAnimationFrame(show)
   }, [pendingToast, dismissToast])
 
   if (!pendingToast) return null

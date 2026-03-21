@@ -24,5 +24,8 @@ dist-ssr
 *.sln
 *.sw?
 
-# Dictionary/text pipeline data
-data/
+# Test coverage
+coverage/
+
+# Dictionary/text pipeline data (root level only, not src/data/)
+/data/

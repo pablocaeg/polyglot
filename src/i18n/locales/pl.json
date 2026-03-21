@@ -2,12 +2,14 @@
   "nav": {
     "home": "Strona główna",
     "words": "Słówka",
+    "vocabulary": "Słownictwo",
     "difficultWords": "Trudne słówka",
     "flashcards": "Fiszki",
     "quiz": "Quiz",
     "practice": "Ćwiczenia",
     "stats": "Statystyki",
-    "settings": "Ustawienia"
+    "settings": "Ustawienia",
+    "myWords": "Moje słówka"
   },
   "brand": {
     "name": "Polyglot",
@@ -22,6 +24,7 @@
     "de": "Niemiecki",
     "it": "Włoski",
     "pt": "Portugalski",
+    "nl": "Holenderski",
     "iSpeak": "Mówię",
     "iLearn": "Uczę się",
     "swapLanguages": "Zamień języki",
@@ -29,10 +32,12 @@
   },
   "skillLevel": {
     "title": "Poziom",
-    "beginner": "Początkujący",
-    "intermediate": "Średnio zaawansowany",
-    "advanced": "Zaawansowany",
-    "expert": "Ekspert"
+    "A1": "Początkujący",
+    "A2": "Podstawowy",
+    "B1": "Średni",
+    "B2": "Śr. zaawans.",
+    "C1": "Zaawansowany",
+    "C2": "Biegły"
   },
   "theme": {
     "title": "Motyw",
@@ -123,9 +128,10 @@
     "formalPrompt": "Czy \"{{word}}\" jest formalne czy potoczne? Jakie istnieją alternatywy?"
   },
   "practice": {
-    "title": "Ćwiczenia",
-    "subtitle": "Powtórz i przetestuj swoje słownictwo",
-    "choosePracticeMode": "Wybierz tryb ćwiczeń powyżej"
+    "title": "Słownictwo",
+    "subtitle": "Twoje zapisane słówka i ćwiczenia",
+    "choosePracticeMode": "Wybierz tryb ćwiczeń powyżej",
+    "fromSavedWords": "Z twoich zapisanych słówek"
   },
   "flashcards": {
     "tapToReveal": "dotknij, aby odkryć",
@@ -172,7 +178,9 @@
     "pause": "Pauza",
     "resume": "Wzn\u00f3w",
     "stop": "Stop",
-    "restart": "Od nowa"
+    "restart": "Od nowa",
+    "add": "Dodaj",
+    "cancel": "Anuluj"
   },
   "streak": {
     "dayStreak": "Seria {{count}} dni",
@@ -262,8 +270,14 @@
     "dueNow": "Do powt\u00f3rki teraz",
     "dueTomorrow": "Do powt\u00f3rki jutro",
     "dueInDays": "Do powt\u00f3rki za {{days}} dni",
-    "addNote": "+ Dodaj notatk\u0119",
-    "notePlaceholder": "Dodaj mnemotechnik\u0119 lub notatk\u0119..."
+    "addNote": "+ Dodaj notatkę",
+    "notePlaceholder": "Dodaj mnemotechnikę lub notatkę...",
+    "addWord": "Dodaj słówko",
+    "addWordTitle": "Dodaj słówko",
+    "wordLabel": "Słówko",
+    "translationLabel": "Tłumaczenie",
+    "contextLabel": "Kontekst (opcjonalnie)",
+    "wordRequired": "Słówko i tłumaczenie są wymagane"
   },
   "uiLanguage": {
     "title": "J\u0119zyk",

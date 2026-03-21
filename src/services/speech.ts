@@ -15,6 +15,7 @@ const LANG_CODES: Record<Language, string> = {
   de: 'de-DE',
   it: 'it-IT',
   pt: 'pt-PT',
+  nl: 'nl-NL',
 }
 
 interface WordCue {
@@ -81,7 +82,10 @@ export function clearCache(): void {
 /* ── Playback state ────────────────────────────── */
 
 let currentAudio: HTMLAudioElement | null = null
+let currentAudioUrl: string | null = null
 let cueTimer: number | null = null
+let fetchAbort: AbortController | null = null
+let stopped = false
 
 export async function speak(
   text: string,
@@ -92,30 +96,46 @@ export async function speak(
   speed: TTSSpeed = 'normal'
 ) {
   stop()
+  stopped = false
+
+  // Create abort controller for this speak call
+  const abortCtrl = new AbortController()
+  fetchAbort = abortCtrl
 
   try {
     // Check cache first, otherwise fetch
     const key = cacheKey(text, lang, speed)
     let cached = ttsCache.has(key) ? await ttsCache.get(key) : null
 
+    if (abortCtrl.signal.aborted) return
+
     if (!cached) {
-      const controller = new AbortController()
-      const timeout = setTimeout(() => controller.abort(), 25000)
-      cached = await fetchTTS(text, lang, speed, controller.signal)
+      const timeout = setTimeout(() => abortCtrl.abort(), 25000)
+      cached = await fetchTTS(text, lang, speed, abortCtrl.signal)
       clearTimeout(timeout)
+
+      if (abortCtrl.signal.aborted) return
 
       if (cached) {
         ttsCache.set(key, Promise.resolve(cached))
       }
     }
 
-    if (!cached) throw new Error('TTS failed')
+    if (!cached || stopped) throw new Error('TTS failed')
 
     const audioBytes = Uint8Array.from(atob(cached.audio), (c) => c.charCodeAt(0))
     const blob = new Blob([audioBytes], { type: 'audio/mpeg' })
     const url = URL.createObjectURL(blob)
     const audio = new Audio(url)
+
+    // If stopped while we were decoding, abort
+    if (stopped) {
+      URL.revokeObjectURL(url)
+      return
+    }
+
     currentAudio = audio
+    currentAudioUrl = url
 
     if (onBoundary && cached.cues.length > 0) {
       const mappedCues = mapCuesToText(cached.cues, text)
@@ -139,6 +159,7 @@ export async function speak(
       }
 
       audio.addEventListener('playing', () => {
+        if (cueTimer !== null) cancelAnimationFrame(cueTimer)
         cueTimer = requestAnimationFrame(pollCue)
       })
     }
@@ -148,17 +169,19 @@ export async function speak(
     }, { once: true })
 
     audio.addEventListener('ended', () => {
-      cleanup(url)
+      cleanupAudio()
       onEnd?.()
     })
 
     audio.addEventListener('error', () => {
-      cleanup(url)
-      onEnd?.()
+      cleanupAudio()
+      // Only call onEnd if we weren't deliberately stopped
+      if (!stopped) onEnd?.()
     })
 
     await audio.play()
   } catch {
+    if (stopped) return
     try {
       onPlay?.()
       speakFallback(text, lang, onBoundary, onEnd, speed)
@@ -203,12 +226,15 @@ function mapCuesToText(cues: WordCue[], text: string): MappedCue[] {
   return result
 }
 
-function cleanup(url?: string) {
+function cleanupAudio() {
   if (cueTimer !== null) {
     cancelAnimationFrame(cueTimer)
     cueTimer = null
   }
-  if (url) URL.revokeObjectURL(url)
+  if (currentAudioUrl) {
+    URL.revokeObjectURL(currentAudioUrl)
+    currentAudioUrl = null
+  }
   currentAudio = null
 }
 
@@ -247,6 +273,11 @@ function speakFallback(
 export function pause() {
   if (currentAudio && !currentAudio.paused) {
     currentAudio.pause()
+    // Stop cue polling while paused
+    if (cueTimer !== null) {
+      cancelAnimationFrame(cueTimer)
+      cueTimer = null
+    }
   }
   if (speechSynthesis.speaking && !speechSynthesis.paused) {
     speechSynthesis.pause()
@@ -254,8 +285,8 @@ export function pause() {
 }
 
 export function resume() {
-  if (currentAudio && currentAudio.paused && currentAudio.src) {
-    currentAudio.play()
+  if (currentAudio && currentAudio.paused && currentAudio.currentTime > 0) {
+    currentAudio.play().catch(() => {})
   }
   if (speechSynthesis.paused) {
     speechSynthesis.resume()
@@ -263,14 +294,28 @@ export function resume() {
 }
 
 export function stop() {
+  stopped = true
+
+  // Abort any pending fetch
+  if (fetchAbort) {
+    fetchAbort.abort()
+    fetchAbort = null
+  }
+
   if (cueTimer !== null) {
     cancelAnimationFrame(cueTimer)
     cueTimer = null
   }
   if (currentAudio) {
+    // Remove listeners before pausing to prevent onEnd/onError callbacks
+    currentAudio.onended = null
+    currentAudio.onerror = null
     currentAudio.pause()
-    currentAudio.src = ''
     currentAudio = null
+  }
+  if (currentAudioUrl) {
+    URL.revokeObjectURL(currentAudioUrl)
+    currentAudioUrl = null
   }
   speechSynthesis.cancel()
 }

@@ -2,18 +2,16 @@ import type { LanguageDirection, SkillLevel } from '../types'
 
 const LANG_NAMES: Record<string, string> = {
   pl: 'Polish', es: 'Spanish', en: 'English',
-  fr: 'French', de: 'German', it: 'Italian', pt: 'Portuguese',
+  fr: 'French', de: 'German', it: 'Italian', pt: 'Portuguese', nl: 'Dutch',
 }
 
 const SKILL_CONTEXT: Record<SkillLevel, string> = {
-  beginner:
-    'The user is a beginner (A1-A2). Use very simple vocabulary and short explanations. Always provide translations for every example.',
-  intermediate:
-    'The user is at intermediate level (B1). Use moderately complex language. Provide translations for harder words.',
-  advanced:
-    'The user is advanced (B2-C1). Use rich vocabulary. Translations optional for common words.',
-  expert:
-    'The user is expert level (C2). Respond primarily in the target language. Minimal translations needed.',
+  A1: 'The user is an absolute beginner (A1). Use the simplest possible vocabulary and very short explanations. Always provide translations for every single example.',
+  A2: 'The user is a beginner (A2). Use very simple vocabulary and short explanations. Always provide translations for every example.',
+  B1: 'The user is at intermediate level (B1). Use moderately complex language. Provide translations for harder words.',
+  B2: 'The user is at upper-intermediate level (B2). Use natural language with some complex structures. Provide translations for uncommon words.',
+  C1: 'The user is advanced (C1). Use rich vocabulary. Translations optional for common words.',
+  C2: 'The user is expert level (C2). Respond primarily in the target language. Minimal translations needed.',
 }
 
 export function buildChatSystemPrompt(

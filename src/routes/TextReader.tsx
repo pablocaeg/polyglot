@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams, useNavigate } from 'react-router-dom'
-import type { GeneratedText, FontSize } from '../types'
+import type { GeneratedText } from '../types'
 import { getText } from '../services/storage'
 import { fetchVocabulary } from '../services/api'
 import { preload as preloadTTS } from '../services/speech'
@@ -12,13 +12,6 @@ import { useActivityStore } from '../stores/useActivityStore'
 import { useGamificationStore } from '../stores/useGamificationStore'
 import InteractiveText from '../components/InteractiveText'
 import SpeechButton from '../components/SpeechButton'
-
-const FONT_SIZES: { key: FontSize; label: string }[] = [
-  { key: 'small', label: 'S' },
-  { key: 'medium', label: 'M' },
-  { key: 'large', label: 'L' },
-  { key: 'xlarge', label: 'XL' },
-]
 
 export default function TextReader() {
   const { id } = useParams<{ id: string }>()
@@ -37,7 +30,7 @@ export default function TextReader() {
   const [ttsSentenceIdx, setTtsSentenceIdx] = useState(0)
   const { loadWords } = useDifficultWordsStore()
   const { toggleBookmark, updateWordTranslations } = useTextsStore()
-  const { readingPreferences, setFontSize, setSentenceMode, setTTSSpeed } = useSettingsStore()
+  const { readingPreferences, setSentenceMode, setTTSSpeed } = useSettingsStore()
   const { recordTextRead } = useActivityStore()
 
 
@@ -106,6 +99,7 @@ export default function TextReader() {
     : displayContent
 
   // Phrase selection — no-op now that WordPopup is removed
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handlePhraseSelect = useCallback((_phrase: string) => {}, [])
 
   // In sentence mode, TTS reads a single sentence but InteractiveText
@@ -238,28 +232,8 @@ export default function TextReader() {
             />
           </div>
 
-          {/* Controls row: font + speed + sentence mode */}
+          {/* Controls row: speed + sentence mode */}
           <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide pb-1 -mx-1 px-1">
-            {/* Font size */}
-            <div className="flex gap-0.5 card rounded-[var(--t-r-btn)] p-0.5 shrink-0">
-              {FONT_SIZES.map((fs) => (
-                <button
-                  key={fs.key}
-                  onClick={() => setFontSize(fs.key)}
-                  className={`w-8 h-7 rounded-[var(--t-r-btn)] text-[11px] font-semibold font-ui transition-all ${
-                    readingPreferences.fontSize === fs.key
-                      ? 'bg-th-accent text-th-on-accent'
-                      : 'text-th-muted hover:text-th-primary'
-                  }`}
-                >
-                  {fs.label}
-                </button>
-              ))}
-            </div>
-
-            {/* Divider */}
-            <div className="w-px h-5 bg-th-border shrink-0" />
-
             {/* TTS Speed */}
             <div className="flex gap-0.5 card rounded-[var(--t-r-btn)] p-0.5 shrink-0">
               {(['slow', 'normal', 'fast'] as const).map((s) => (

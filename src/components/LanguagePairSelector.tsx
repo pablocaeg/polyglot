@@ -1,15 +1,15 @@
 import { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSettingsStore } from '../stores/useSettingsStore'
-import { FlagPL, FlagES, FlagEN, FlagFR, FlagDE, FlagIT, FlagPT } from './Icons'
+import { FlagPL, FlagES, FlagEN, FlagFR, FlagDE, FlagIT, FlagPT, FlagNL } from './Icons'
 import type { Language } from '../types'
 
 const FLAGS: Record<Language, typeof FlagPL> = {
   pl: FlagPL, es: FlagES, en: FlagEN,
-  fr: FlagFR, de: FlagDE, it: FlagIT, pt: FlagPT,
+  fr: FlagFR, de: FlagDE, it: FlagIT, pt: FlagPT, nl: FlagNL,
 }
 
-const ALL_LANGUAGES: Language[] = ['en', 'es', 'fr', 'de', 'it', 'pl', 'pt']
+const ALL_LANGUAGES: Language[] = ['en', 'es', 'fr', 'de', 'it', 'nl', 'pl', 'pt']
 
 type PickerSide = 'native' | 'target' | null
 

@@ -1,12 +1,15 @@
 {
   "name": "polyglot",
-  "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "description": "Language learning PWA with AI-generated texts, spaced repetition, and interactive reading",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "test": "vitest",
+    "test:run": "vitest run",
     "preview": "vite preview",
     "server": "node --import tsx server/index.ts",
     "start": "npm run build && npm run server"
@@ -45,6 +48,7 @@
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.56.1",
     "vite": "^8.0.0",
-    "vite-plugin-pwa": "^1.2.0"
+    "vite-plugin-pwa": "^1.2.0",
+    "vitest": "^4.1.0"
   }
 }

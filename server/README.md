@@ -231,7 +231,7 @@ Generate or serve a reading text.
 
 ```json
 // Request
-{ "direction": {"target": "es", "native": "pl"}, "skillLevel": "beginner", "category": "food" }
+{ "direction": {"target": "es", "native": "pl"}, "skillLevel": "A1", "category": "food" }
 
 // Response
 { "title": "...", "content": "...", "fullTranslation": "...", "wordTranslations": [{...}] }
@@ -253,7 +253,7 @@ Extract vocabulary from a text passage.
 
 ```json
 // Request
-{ "content": "El gato duerme en el jardín.", "direction": {"target": "es", "native": "pl"}, "skillLevel": "beginner" }
+{ "content": "El gato duerme en el jardín.", "direction": {"target": "es", "native": "pl"}, "skillLevel": "A1" }
 
 // Response
 { "wordTranslations": [{"word": "El", "translation": "ten", "pos": "art", "grammar": "..."}, ...] }
@@ -264,7 +264,7 @@ Streaming AI word explanations (SSE).
 
 ```json
 // Request
-{ "word": "comieron", "translation": "zjedli", "messages": [{"role": "user", "content": "Odmień ten czasownik"}], "direction": {"target": "es", "native": "pl"}, "skillLevel": "beginner", "context": "sentence" }
+{ "word": "comieron", "translation": "zjedli", "messages": [{"role": "user", "content": "Odmień ten czasownik"}], "direction": {"target": "es", "native": "pl"}, "skillLevel": "A1", "context": "sentence" }
 
 // Response: text/event-stream (SSE chunks)
 ```
