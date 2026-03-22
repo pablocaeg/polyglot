@@ -140,19 +140,12 @@ You MUST pause for user input at these points:
 
 When the user asks what to contribute, suggest from this prioritized list:
 
-### High Priority (open source readiness)
-1. **Set up testing infrastructure** (Vitest + Testing Library) and write initial tests for pure utilities
-2. **Create CONTRIBUTING.md** with development setup, coding standards, and PR process
-3. **Add error boundaries** to catch and display errors gracefully
-4. **Add prefers-reduced-motion support** for users who are sensitive to animation
-5. **Create a proper README.md** replacing the Vite template boilerplate
-
-### Medium Priority (contributor experience)
-6. **Add GitHub issue templates** (bug report, feature request, new language)
-7. **Add GitHub Actions CI** (build, lint, test on PRs)
-8. **Add Storybook** or a component gallery page for design system documentation
-9. **Add more UI languages** (French, German, Italian, Portuguese)
-10. **Add end-to-end tests** with Playwright for critical user flows
+### High Priority
+1. **Expand test coverage** — add tests for stores, components, and services (Vitest already configured)
+2. **Add more UI languages** (French, German, Italian, Portuguese) — the i18n infrastructure is ready
+3. **Add end-to-end tests** with Playwright for critical user flows
+4. **Add Storybook** or a component gallery page for design system documentation
+5. **Add aria-live regions** for dynamic content (toasts, quiz results, loading states)
 
 ### Feature Contributions
 11. **Offline progress sync** (queue activity updates when offline, sync when online)

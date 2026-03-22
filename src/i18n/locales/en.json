@@ -180,7 +180,16 @@
     "stop": "Stop",
     "restart": "Restart",
     "add": "Add",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "saved": "Saved",
+    "saveWord": "Save word",
+    "askAI": "Ask AI",
+    "sendMessage": "Send message",
+    "decreaseGoal": "Decrease goal",
+    "increaseGoal": "Increase goal",
+    "reload": "Reload",
+    "somethingWentWrong": "Something went wrong",
+    "unexpectedError": "An unexpected error occurred. Try refreshing the page."
   },
   "streak": {
     "dayStreak": "{{count}}-day streak",

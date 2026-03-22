@@ -19,7 +19,7 @@ polyglot/
     main.tsx              -- Router setup, lazy loading, Suspense boundaries
     index.css             -- Theme system (6 themes), animations, utility classes
     types/index.ts        -- All shared TypeScript types
-    components/           -- 23 React components (functional, memo where needed)
+    components/           -- 24 React components (functional, memo where needed)
     routes/               -- 8 route pages (Home, TextReader, DifficultWords, Practice, Flashcards, Quiz, Stats, Settings)
     stores/               -- 7 Zustand stores (settings, texts, difficultWords, activity, gamification, offlineQueue, theme)
     services/             -- API client, speech/TTS, IndexedDB storage, LLM prompts, chat prompts
@@ -76,7 +76,7 @@ polyglot/
 6. Activity tracked -> IndexedDB -> streak computation -> gamification XP
 
 ### Types (src/types/index.ts)
-- `Language`: 'pl' | 'es' | 'en' | 'fr' | 'de' | 'it' | 'pt'
+- `Language`: 'pl' | 'es' | 'en' | 'fr' | 'de' | 'it' | 'pt' | 'nl'
 - `LanguageDirection`: { native: Language, target: Language }
 - `SkillLevel`: 'beginner' | 'intermediate' | 'advanced' | 'expert'
 - `MasteryLevel`: 'new' | 'recognized' | 'recalled' | 'mastered'

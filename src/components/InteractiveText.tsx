@@ -42,6 +42,7 @@ const InlineTooltip = memo(function InlineTooltip({
   isSaved: boolean
   onClose: () => void
 }) {
+  const { t } = useTranslation()
   const tipRef = useRef<HTMLSpanElement>(null)
   const [shift, setShift] = useState(0)
 
@@ -85,7 +86,7 @@ const InlineTooltip = memo(function InlineTooltip({
             ? 'text-th-success'
             : 'text-th-warning hover:bg-th-warning/15'
         }`}
-        title={isSaved ? 'Saved' : 'Save word'}
+        aria-label={isSaved ? t('common.saved') : t('common.saveWord')}
       >
         {isSaved ? (
           <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -96,7 +97,7 @@ const InlineTooltip = memo(function InlineTooltip({
             <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
-            <span className="text-[10px] font-semibold font-ui">Save</span>
+            <span className="text-[10px] font-semibold font-ui">{t('common.save')}</span>
           </>
         )}
       </button>
@@ -105,7 +106,7 @@ const InlineTooltip = memo(function InlineTooltip({
       <button
         onClick={onMore}
         className="flex items-center gap-1 px-1.5 h-6 rounded-full text-th-accent hover:bg-th-accent/15 shrink-0 transition-all active:scale-95"
-        title="Ask AI"
+        aria-label={t('common.askAI')}
       >
         <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
@@ -117,6 +118,7 @@ const InlineTooltip = memo(function InlineTooltip({
       <button
         onClick={onClose}
         className="w-5 h-5 flex items-center justify-center rounded-full text-th-muted hover:text-th-primary shrink-0 transition-colors"
+        aria-label={t('common.close')}
       >
         <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />

@@ -147,6 +147,7 @@ export default function WordPopup({
               <button
                 onClick={onClose}
                 className="shrink-0 w-8 h-8 flex items-center justify-center rounded-full text-th-muted hover:text-th-primary hover:bg-th-surface-hover transition-colors"
+                aria-label={t('common.close')}
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />

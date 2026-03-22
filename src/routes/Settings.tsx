@@ -105,7 +105,7 @@ export default function Settings() {
             <button
               onClick={() => setDailyGoal(dailyGoal - 5)}
               className="w-10 h-10 rounded-[var(--t-r-btn)] btn-surface text-th-secondary hover:text-th-primary flex items-center justify-center transition-colors"
-              aria-label="Decrease goal"
+              aria-label={t('common.decreaseGoal')}
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
@@ -115,7 +115,7 @@ export default function Settings() {
             <button
               onClick={() => setDailyGoal(dailyGoal + 5)}
               className="w-10 h-10 rounded-[var(--t-r-btn)] btn-surface text-th-secondary hover:text-th-primary flex items-center justify-center transition-colors"
-              aria-label="Increase goal"
+              aria-label={t('common.increaseGoal')}
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />

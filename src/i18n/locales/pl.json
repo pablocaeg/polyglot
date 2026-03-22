@@ -180,7 +180,16 @@
     "stop": "Stop",
     "restart": "Od nowa",
     "add": "Dodaj",
-    "cancel": "Anuluj"
+    "cancel": "Anuluj",
+    "saved": "Zapisano",
+    "saveWord": "Zapisz słowo",
+    "askAI": "Zapytaj AI",
+    "sendMessage": "Wyślij wiadomość",
+    "decreaseGoal": "Zmniejsz cel",
+    "increaseGoal": "Zwiększ cel",
+    "reload": "Odśwież",
+    "somethingWentWrong": "Coś poszło nie tak",
+    "unexpectedError": "Wystąpił nieoczekiwany błąd. Spróbuj odświeżyć stronę."
   },
   "streak": {
     "dayStreak": "Seria {{count}} dni",

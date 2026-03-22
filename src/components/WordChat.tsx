@@ -409,6 +409,7 @@ export default function WordChat({ word, context, direction, onClose }: WordChat
               type="submit"
               disabled={!input.trim() || streaming || atLimit}
               className="w-10 h-10 flex items-center justify-center rounded-full bg-th-accent hover:bg-th-accent-hover transition-all text-th-on-accent disabled:opacity-15 disabled:cursor-not-allowed active:scale-95 shrink-0"
+              aria-label={t('common.sendMessage')}
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />

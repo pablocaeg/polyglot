@@ -180,7 +180,16 @@
     "stop": "Parar",
     "restart": "Reiniciar",
     "add": "Añadir",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "saved": "Guardado",
+    "saveWord": "Guardar palabra",
+    "askAI": "Preguntar a la IA",
+    "sendMessage": "Enviar mensaje",
+    "decreaseGoal": "Reducir objetivo",
+    "increaseGoal": "Aumentar objetivo",
+    "reload": "Recargar",
+    "somethingWentWrong": "Algo salió mal",
+    "unexpectedError": "Ocurrió un error inesperado. Intenta recargar la página."
   },
   "streak": {
     "dayStreak": "Racha de {{count}} d\u00edas",
